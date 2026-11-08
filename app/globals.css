@@ -1,0 +1,168 @@
+
+@import "tailwindcss";
+
+:root {
+  --background: #100d16;
+  --foreground: #ffffff;
+
+  --primary: #8b5cf6;
+  --primary-light: #a78bfa;
+
+  --gold: #d8b76d;
+  --gold-light: #f0d99b;
+
+  --card-background: #211a2c;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    Arial,
+    "Noto Sans KR",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+input {
+  color-scheme: dark;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.4);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #100d16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #40344f;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8b5cf6;
+}
+
+/* Input number */
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Card animation */
+@keyframes card-shuffle-left {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(-35px, -15px) rotate(-12deg);
+  }
+
+  50% {
+    transform: translate(25px, 10px) rotate(10deg);
+  }
+
+  75% {
+    transform: translate(-15px, 5px) rotate(-6deg);
+  }
+}
+
+@keyframes card-shuffle-right {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(35px, 15px) rotate(12deg);
+  }
+
+  50% {
+    transform: translate(-25px, -10px) rotate(-10deg);
+  }
+
+  75% {
+    transform: translate(15px, -5px) rotate(6deg);
+  }
+}
+
+.shuffle-card.is-shuffling:nth-child(odd) {
+  animation: card-shuffle-left 0.85s ease-in-out;
+}
+
+.shuffle-card.is-shuffling:nth-child(even) {
+  animation: card-shuffle-right 0.85s ease-in-out;
+}
+
+/* Card flip */
+.flip-card {
+  perspective: 1200px;
+}
+
+.flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
